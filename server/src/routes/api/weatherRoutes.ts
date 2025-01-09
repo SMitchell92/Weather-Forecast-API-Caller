@@ -11,6 +11,7 @@ router.post('/', async (req: Request, res: Response) => {
   // TODO: save city to search history
   try {
     const weatherQuery = await WeatherService.getWeatherForCity(req.body.cityName);
+    console.log("Weather Query: ", weatherQuery);
     res.status(200).json(weatherQuery);
   } catch (error) {
     console.log("Error: ", error);
@@ -21,7 +22,7 @@ router.post('/', async (req: Request, res: Response) => {
 // TODO: GET search history
 router.get('/history', async (_req: Request, res: Response) => {
   try {
-    res.status(200).json("History request placeholder");
+    res.status(200).json([]);
   } catch (error) {
     console.log("Error: ", error);
     res.status(500).json(error)
