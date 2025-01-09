@@ -86,8 +86,11 @@ class WeatherService {
   }
   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
     const forecastArray = [currentWeather];
-    console.log(weatherData);
-    for (let i = 1; i < weatherData.length; i++) {
+    console.log(weatherData.length)
+    for (let i = 1; i < weatherData.length; i++)
+     {
+      if (!weatherData[i].dt_txt.includes("15:00:00")){ continue; }
+    
       forecastArray.push({
         date: new Date(weatherData[i].dt_txt * 1000).toLocaleDateString(),
         description: weatherData[i].weather[0].description,
@@ -105,28 +108,10 @@ class WeatherService {
     const coordinates = await this.fetchAndDestructureLocationData();
     const weatherData = await this.fetchWeatherData(coordinates);
     const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
-    const forecast = this.buildForecastArray(currentWeather, weatherData);
-    console.log(`here is the ${forecast}`);
+    const forecast = this.buildForecastArray(currentWeather, weatherData.list)
+    console.log(forecast);
     return forecast;
   }
 }
-  // ? TODO: Create fetchLocationData method
-  // private async fetchLocationData(query: string) {}
-  // ? TODO: Create destructureLocationData method
-  // private destructureLocationData(locationData: Coordinates): Coordinates {}
-  // ?? TODO: Create buildGeocodeQuery method
-  // private buildGeocodeQuery(): string {}
-  // ? TODO: Create buildWeatherQuery method
-  // private buildWeatherQuery(coordinates: Coordinates): string {}
-  // ? TODO: Create fetchAndDestructureLocationData method
-  // private async fetchAndDestructureLocationData() {}
-  // ? TODO: Create fetchWeatherData method
-  // private async fetchWeatherData(coordinates: Coordinates) {}
-  // ? TODO: Build parseCurrentWeather method
-  // private parseCurrentWeather(response: any) {}
-  // ? TODO: Complete buildForecastArray method
-  // private buildForecastArray(currentWeather: Weather, weatherData: any[]) {}
-  // ? TODO: Complete getWeatherForCity method
-  // async getWeatherForCity(city: string) {}
 
 export default new WeatherService();
