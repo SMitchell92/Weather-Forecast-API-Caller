@@ -1,12 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-// x TODO: Define an interface for the Coordinates object
 interface Coordinates {
   lat: number;
   lon: number;
 }
-// x TODO: Define a class for the Weather object
+
 class Weather {
   city: string;
   date: string;
@@ -34,9 +33,8 @@ class Weather {
     this.windSpeed = wind;
   }
 }
-// x TODO: Complete the WeatherService class
+
 class WeatherService {
-    // x TODO: Define the baseURL, API key, and city name properties
   baseURL: string;
   apiKey: string;
   cityName: string;
@@ -86,7 +84,6 @@ class WeatherService {
   }
   private buildForecastArray(currentWeather: Weather, weatherData: any[]) {
     const forecastArray = [currentWeather];
-    console.log(weatherData.length)
     for (let i = 1; i < weatherData.length; i++)
      {
       if (!weatherData[i].dt_txt.includes("15:00:00")){ continue; }
@@ -109,7 +106,6 @@ class WeatherService {
     const weatherData = await this.fetchWeatherData(coordinates);
     const currentWeather = this.parseCurrentWeather(weatherData.list[0]);
     const forecast = this.buildForecastArray(currentWeather, weatherData.list)
-    console.log(forecast);
     return forecast;
   }
 }
