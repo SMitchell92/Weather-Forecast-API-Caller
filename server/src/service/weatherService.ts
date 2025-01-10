@@ -92,7 +92,7 @@ class WeatherService {
       if (!weatherData[i].dt_txt.includes("15:00:00")){ continue; }
     
       forecastArray.push({
-        date: new Date(weatherData[i].dt_txt * 1000).toLocaleDateString(),
+        date: new Date(weatherData[i].dt * 1000).toLocaleDateString(),
         description: weatherData[i].weather[0].description,
         icon: weatherData[i].weather[0].icon,
         tempF: weatherData[i].main.temp,
